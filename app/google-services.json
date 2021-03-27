@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "344206940671",
+    "firebase_url": "https://rentacar-c99b8-default-rtdb.firebaseio.com",
+    "project_id": "rentacar-c99b8",
+    "storage_bucket": "rentacar-c99b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344206940671:android:91c18b17bb7c9866366fca",
+        "android_client_info": {
+          "package_name": "com.example.b2crentacar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344206940671-g3gujv5u4vp1aqg3ugd60v1dtdtmj86g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxTJCeK6juScn36M_pNBgNOMhgQhIick0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344206940671-g3gujv5u4vp1aqg3ugd60v1dtdtmj86g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
