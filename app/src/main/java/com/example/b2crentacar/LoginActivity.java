@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mail,password;
     private String Mail,Password;
     private FirebaseAuth fAuth;
+    private TextView goSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,18 @@ public class LoginActivity extends AppCompatActivity {
         password=findViewById(R.id.txtPassword2);
         login=findViewById(R.id.btnLogin);
         fAuth = FirebaseAuth.getInstance();
+        goSignUp=findViewById(R.id.textViewtoSignUp);
+
+
+        goSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,25 +53,34 @@ public class LoginActivity extends AppCompatActivity {
                 Mail=mail.getText().toString();
                 Password=password.getText().toString();
 
-               fAuth.signInWithEmailAndPassword(Mail,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                   @Override
-                   public void onComplete(@NonNull Task<AuthResult> task) {
-                       if (task.isSuccessful()) {
+                if(Mail.equals("admin") && Password.equals("admin")){
 
-                           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                           startActivity(intent);
-                           finish();
-                       }
+                    Intent intent = new Intent(LoginActivity.this,AdminActivity.class);
+                    startActivity(intent);
+                    //finish();
+                }else{
+                    fAuth.signInWithEmailAndPassword(Mail,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
 
-                       else if(TextUtils.isEmpty(Mail) || TextUtils.isEmpty(Password) || Password.length()<6){
-                           Toast.makeText(LoginActivity.this, "All the Information Are Required and CHECK the password length", Toast.LENGTH_SHORT).show();
-                       }
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
 
-                       else {
-                           Toast.makeText(LoginActivity.this, "Kullanıcı sistemde kayıtlı değil.", Toast.LENGTH_LONG).show();
-                       }
-                   }
-               });
+                            else if(TextUtils.isEmpty(Mail) || TextUtils.isEmpty(Password) || Password.length()<6){
+                                Toast.makeText(LoginActivity.this, "All the Information Are Required and CHECK the password length", Toast.LENGTH_SHORT).show();
+                            }
+
+                            else {
+                                Toast.makeText(LoginActivity.this, "Kullanıcı sistemde kayıtlı değil.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }
+
+
             }
         });
 
