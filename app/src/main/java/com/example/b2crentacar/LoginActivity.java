@@ -50,16 +50,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Mail=mail.getText().toString();
-                Password=password.getText().toString();
+                Mail = mail.getText().toString();
+                Password = password.getText().toString();
 
-                if(Mail.equals("admin") && Password.equals("admin")){
+                if(!TextUtils.isEmpty(Mail) && !TextUtils.isEmpty(Password))  {
+                if (Mail.equals("admin") && Password.equals("admin")) {
 
-                    Intent intent = new Intent(LoginActivity.this,AddCarActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, AddCarActivity.class);
                     startActivity(intent);
                     //finish();
-                }else{
-                    fAuth.signInWithEmailAndPassword(Mail,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                } else {
+                    fAuth.signInWithEmailAndPassword(Mail, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -67,17 +68,17 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
-                            }
-
-                            else if(TextUtils.isEmpty(Mail) || TextUtils.isEmpty(Password) || Password.length()<6){
+                            } else if (TextUtils.isEmpty(Mail) || TextUtils.isEmpty(Password) || Password.length() < 6) {
                                 Toast.makeText(LoginActivity.this, "All the Information Are Required and CHECK the password length", Toast.LENGTH_SHORT).show();
-                            }
-
-                            else {
+                            } else {
                                 Toast.makeText(LoginActivity.this, "Kullanıcı sistemde kayıtlı değil.", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
+                }
+                }else{
+                    Toast.makeText(LoginActivity.this, "Fill the blank inputs", Toast.LENGTH_LONG).show();
+
                 }
 
 
