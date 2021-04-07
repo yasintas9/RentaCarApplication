@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(Mail.equals("admin") && Password.equals("admin")){
 
-                    Intent intent = new Intent(LoginActivity.this,AdminActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,AddCarActivity.class);
                     startActivity(intent);
                     //finish();
                 }else{

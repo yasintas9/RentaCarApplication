@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_gradient"
+    tools:context=".AddCarActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="300dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroup5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:checkedButton="@id/radioButtonGas"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+                <RadioButton
+                    android:id="@+id/radioButtonGas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gas"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonDiesel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Diesel"
+                    android:textColor="#FFFFFF" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioGroup3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:checkedButton="@id/radioButtonSuv"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPrice">
+
+                <RadioButton
+                    android:id="@+id/radioButtonSuv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Suv"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSedan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sedan"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonHatchBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HatchBack"
+                    android:textColor="#FFFFFF" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="Click and add an image"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carImage" />
+
+            <ImageView
+                android:id="@+id/carImage"
+                android:layout_width="167dp"
+                android:layout_height="145dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/addcar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/txtPlateNo"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_input_shape"
+                android:drawableEnd="@drawable/ic_baseline_edit"
+                android:ems="10"
+                android:hint="Plate Number"
+                android:inputType="textPersonName"
+                android:maxLength="11"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="#978B8B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <EditText
+                android:id="@+id/txtModel"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_input_shape"
+                android:drawableEnd="@drawable/ic_baseline_edit"
+                android:ems="10"
+                android:hint="Model"
+                android:inputType="textPersonName"
+                android:maxLength="11"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="#978B8B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtBrand" />
+
+            <EditText
+                android:id="@+id/txtYear"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_input_shape"
+                android:digits="0123456789"
+                android:drawableEnd="@drawable/ic_baseline_edit"
+                android:ems="10"
+                android:hint="Year"
+                android:inputType="textPersonName"
+                android:maxLength="11"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="#978B8B"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPrice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtPrice"
+                app:layout_constraintTop_toTopOf="@+id/txtPrice" />
+
+            <EditText
+                android:id="@+id/txtPrice"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_input_shape"
+                android:digits="0123456789"
+                android:drawableEnd="@drawable/ic_baseline_edit"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="textPersonName"
+                android:maxLength="11"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="#978B8B"
+                app:layout_constraintEnd_toStartOf="@+id/txtYear"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtModel" />
+
+            <EditText
+                android:id="@+id/txtBrand"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_input_shape"
+                android:drawableEnd="@drawable/ic_baseline_edit"
+                android:ems="10"
+                android:hint="Brand"
+                android:inputType="textPersonName"
+                android:maxLength="11"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="#978B8B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPlateNo" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:checkedButton="@id/radioButton"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup3">
+
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Automatic"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonManuel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Manuel"
+                    android:textColor="#FFFFFF" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnAddCar"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_input_shape_button"
+                android:text="Add a car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
