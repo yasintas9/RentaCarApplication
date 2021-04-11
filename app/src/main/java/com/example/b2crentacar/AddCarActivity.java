@@ -1,5 +1,6 @@
 package com.example.b2crentacar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,6 +17,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
 
 public class AddCarActivity extends AppCompatActivity {
@@ -29,6 +36,7 @@ public class AddCarActivity extends AppCompatActivity {
     private RadioButton RadioButtonType, RadioButtonGear, RadioButtonFuelType;
     private String RadioTypeText, RadioGearText, RadioFuelTypeText;
     private Button addCarBtn;
+    private DatabaseReference database;
 
 
 
@@ -46,6 +54,7 @@ public class AddCarActivity extends AppCompatActivity {
         radioGroupGear = findViewById(R.id.radioGroup);
         radioGroupFuelType = findViewById(R.id.radioGroup5);
         addCarBtn = (Button) findViewById(R.id.btnAddCar);
+        database = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -79,6 +88,33 @@ public class AddCarActivity extends AppCompatActivity {
 
                 if(checkInput()){
                     //do the db stuffs
+
+                    database.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                if(snapshot.child("Cars").hasChild(PlateNumber)){
+                                    Toast.makeText(AddCarActivity.this,"The Car is already added",Toast.LENGTH_LONG).show();
+                                }else{
+                                    database.child("Cars").child(PlateNumber).child("Plate Number").setValue(PlateNumber);
+                                    database.child("Cars").child(PlateNumber).child("Brand").setValue(Brand);
+                                    database.child("Cars").child(PlateNumber).child("Model").setValue(Model);
+                                    database.child("Cars").child(PlateNumber).child("Price").setValue(Price);
+                                    database.child("Cars").child(PlateNumber).child("Year").setValue(Year);
+                                    database.child("Cars").child(PlateNumber).child("Type").setValue(RadioTypeText);
+                                    database.child("Cars").child(PlateNumber).child("Gear").setValue(RadioGearText);
+                                    database.child("Cars").child(PlateNumber).child("Fuel Type").setValue(RadioFuelTypeText);
+
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
 
                 }
 
