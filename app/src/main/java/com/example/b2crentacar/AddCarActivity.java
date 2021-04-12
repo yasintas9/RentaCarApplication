@@ -3,6 +3,7 @@ package com.example.b2crentacar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,11 +18,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
@@ -37,6 +44,8 @@ public class AddCarActivity extends AppCompatActivity {
     private String RadioTypeText, RadioGearText, RadioFuelTypeText;
     private Button addCarBtn;
     private DatabaseReference database;
+     FirebaseStorage storage;
+     StorageReference storageReference;
 
 
 
@@ -55,6 +64,9 @@ public class AddCarActivity extends AppCompatActivity {
         radioGroupFuelType = findViewById(R.id.radioGroup5);
         addCarBtn = (Button) findViewById(R.id.btnAddCar);
         database = FirebaseDatabase.getInstance().getReference();
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
 
 
@@ -105,7 +117,7 @@ public class AddCarActivity extends AppCompatActivity {
                                     database.child("Cars").child(PlateNumber).child("Gear").setValue(RadioGearText);
                                     database.child("Cars").child(PlateNumber).child("Fuel Type").setValue(RadioFuelTypeText);
 
-
+                                    uploadImage();
                                 }
                             }
                         }
@@ -157,6 +169,11 @@ public class AddCarActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
+
+
+
+
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
@@ -171,6 +188,44 @@ public class AddCarActivity extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+
+    private void uploadImage() {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Adding Database...");
+            progressDialog.show();
+
+
+            StorageReference ref = storageReference.child("CarsImage").child(PlateNumber).child("carpicture.jpg");
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Adding to Database "+(int)progress+"%");
+                        }
+                    });
         }
     }
 
