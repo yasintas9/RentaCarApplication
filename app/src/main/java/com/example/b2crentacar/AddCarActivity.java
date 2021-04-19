@@ -31,6 +31,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class AddCarActivity extends AppCompatActivity {
     private Uri filePath;
@@ -44,9 +46,10 @@ public class AddCarActivity extends AppCompatActivity {
     private String RadioTypeText, RadioGearText, RadioFuelTypeText;
     private Button addCarBtn;
     private DatabaseReference database;
-     FirebaseStorage storage;
-     StorageReference storageReference;
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
+    private ArrayList<RentDate> dates=new ArrayList<>();
 
 
     @Override
@@ -65,8 +68,8 @@ public class AddCarActivity extends AppCompatActivity {
         addCarBtn = (Button) findViewById(R.id.btnAddCar);
         database = FirebaseDatabase.getInstance().getReference();
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+       storage = FirebaseStorage.getInstance();
+       storageReference = storage.getReference();
 
 
 
@@ -108,6 +111,9 @@ public class AddCarActivity extends AppCompatActivity {
                                 if(snapshot.child("Cars").hasChild(PlateNumber)){
                                     Toast.makeText(AddCarActivity.this,"The Car is already added",Toast.LENGTH_LONG).show();
                                 }else{
+
+                                    uploadImage();
+
                                     database.child("Cars").child(PlateNumber).child("Plate Number").setValue(PlateNumber);
                                     database.child("Cars").child(PlateNumber).child("Brand").setValue(Brand);
                                     database.child("Cars").child(PlateNumber).child("Model").setValue(Model);
@@ -116,8 +122,8 @@ public class AddCarActivity extends AppCompatActivity {
                                     database.child("Cars").child(PlateNumber).child("Type").setValue(RadioTypeText);
                                     database.child("Cars").child(PlateNumber).child("Gear").setValue(RadioGearText);
                                     database.child("Cars").child(PlateNumber).child("Fuel Type").setValue(RadioFuelTypeText);
+                                    database.child("Cars").child(PlateNumber).child("dates").setValue(dates);
 
-                                    uploadImage();
                                 }
                             }
                         }

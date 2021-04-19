@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="25dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="340dp"
+        android:layout_height="690dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImage"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/addcar"></androidx.appcompat.widget.AppCompatImageView>
+
+            <TextView
+                android:id="@+id/brandAndModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/itemImage"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="Renault Clio"
+                android:textColor="@color/orange"
+                android:textSize="25sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/brandAndModel"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="2021"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignLeft="@+id/year"
+                android:layout_below="@+id/brandAndModel"
+                android:gravity="left"
+                android:text="Year:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:id="@+id/gear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/year"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="Manuel"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignLeft="@+id/gear"
+                android:layout_below="@+id/year"
+                android:gravity="left"
+                android:text="Gear:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gear"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="Hatchback"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignLeft="@+id/year"
+                android:layout_below="@+id/gear"
+                android:gravity="left"
+                android:text="Type:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:id="@+id/fuelType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/type"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="Diesel"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignLeft="@+id/year"
+                android:layout_below="@+id/type"
+                android:gravity="left"
+                android:text="Fuel Type:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fuelType"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="200 TL"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignLeft="@+id/year"
+                android:layout_below="@+id/fuelType"
+                android:gravity="left"
+                android:text="One Day Price:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:id="@+id/pickupDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="18.04.2021"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignLeft="@+id/year"
+                android:layout_below="@+id/price"
+                android:gravity="left"
+                android:text="Pick up Date:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+            <TextView
+                android:id="@+id/dropoffDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pickupDate"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="24.04.2021"
+                android:textColor="@color/blueish"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="-65dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/pickupDate"
+                android:gravity="left"
+                android:text="Drop off Date:"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dropoffDate"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/ic_input_shape"
+                android:backgroundTint="@color/orange"
+                android:gravity="center"
+                android:text="SELECT"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
