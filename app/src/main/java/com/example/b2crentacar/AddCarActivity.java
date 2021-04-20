@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -68,8 +69,8 @@ public class AddCarActivity extends AppCompatActivity {
         addCarBtn = (Button) findViewById(R.id.btnAddCar);
         database = FirebaseDatabase.getInstance().getReference();
 
-       storage = FirebaseStorage.getInstance();
-       storageReference = storage.getReference();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
 
 
@@ -114,19 +115,20 @@ public class AddCarActivity extends AppCompatActivity {
 
                                     uploadImage();
 
-                                    database.child("Cars").child(PlateNumber).child("Plate Number").setValue(PlateNumber);
+                                    database.child("Cars").child(PlateNumber).child("PlateNumber").setValue(PlateNumber);
                                     database.child("Cars").child(PlateNumber).child("Brand").setValue(Brand);
                                     database.child("Cars").child(PlateNumber).child("Model").setValue(Model);
                                     database.child("Cars").child(PlateNumber).child("Price").setValue(Price);
                                     database.child("Cars").child(PlateNumber).child("Year").setValue(Year);
                                     database.child("Cars").child(PlateNumber).child("Type").setValue(RadioTypeText);
                                     database.child("Cars").child(PlateNumber).child("Gear").setValue(RadioGearText);
-                                    database.child("Cars").child(PlateNumber).child("Fuel Type").setValue(RadioFuelTypeText);
-                                    database.child("Cars").child(PlateNumber).child("dates").setValue(dates);
+                                    database.child("Cars").child(PlateNumber).child("Fueltype").setValue(RadioFuelTypeText);
+                                    database.child("Cars").child(PlateNumber).child("Dates").setValue(dates);
 
                                 }
                             }
                         }
+
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -201,19 +203,49 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void uploadImage() {
 
-        if(filePath != null)
-        {
+        if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Adding Database...");
             progressDialog.show();
 
+            //  StorageReference ref = storageReference.child("CarsImage").child(PlateNumber).child("carpicture.jpg");
+            //            ref.putFile(filePath)
 
-            StorageReference ref = storageReference.child("CarsImage").child(PlateNumber).child("carpicture.jpg");
+            StorageReference ref = storageReference.child(PlateNumber);
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+
+                            //download url
+                            StorageReference newReference = FirebaseStorage.getInstance().getReference(PlateNumber);
+                            newReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String downloadUrl = uri.toString();
+                                    //  System.out.println("download  uri"+downloadUrl);
+
+                                    database.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+
+                                                database.child("Cars").child(PlateNumber).child("Photo").setValue(downloadUrl);
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+                                }
+                            });
 
                         }
                     })
@@ -227,14 +259,13 @@ public class AddCarActivity extends AppCompatActivity {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                            double progress = (111100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Adding to Database "+(int)progress+"%");
+                            progressDialog.setMessage("Adding to Database " + (int) progress + "%");
                         }
                     });
         }
+
     }
-
-
 
 }

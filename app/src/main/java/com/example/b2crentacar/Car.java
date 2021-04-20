@@ -5,19 +5,22 @@ import java.util.Date;
 
 public class Car {
 
-    private String PlateNumber,Brand,Model,Price,Year,type,fueltype,gear,photo;
+    private String PlateNumber,Brand,Model,Price,Year,Type,Fueltype,Gear,Photo;
     private ArrayList<RentDate> dates;
 
-    public Car(String plateNumber, String brand, String model, String price, String year, String type, String fueltype, String gear,String photo) {
+    public Car() {
+    }
+
+    public Car(String plateNumber, String brand, String model, String price, String year, String type, String fueltype, String gear, String photo) {
         PlateNumber = plateNumber;
         Brand = brand;
         Model = model;
         Price = price;
         Year = year;
-        this.type = type;
-        this.fueltype = fueltype;
-        this.gear = gear;
-        this.photo=photo;
+        Type = type;
+        Fueltype = fueltype;
+        Gear = gear;
+        Photo=photo;
         dates=new ArrayList<>();
     }
 
@@ -27,14 +30,6 @@ public class Car {
 
     public void setDates(ArrayList<RentDate> dates) {
         this.dates = dates;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public String getPlateNumber() {
@@ -78,26 +73,34 @@ public class Car {
     }
 
     public String getType() {
-        return type;
+        return Type;
     }
 
     public void setType(String type) {
-        this.type = type;
+        Type = type;
     }
 
     public String getFueltype() {
-        return fueltype;
+        return Fueltype;
     }
 
     public void setFueltype(String fueltype) {
-        this.fueltype = fueltype;
+        Fueltype = fueltype;
     }
 
     public String getGear() {
-        return gear;
+        return Gear;
     }
 
     public void setGear(String gear) {
-        this.gear = gear;
+        Gear = gear;
+    }
+
+    public String getPhoto() {
+        return Photo;
+    }
+
+    public void setPhoto(String photo) {
+        Photo = photo;
     }
 }
