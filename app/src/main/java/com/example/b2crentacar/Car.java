@@ -1,6 +1,7 @@
 package com.example.b2crentacar;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Car {
@@ -103,4 +104,53 @@ public class Car {
     public void setPhoto(String photo) {
         Photo = photo;
     }
+
+    public static Comparator<Car> compareToYear = new Comparator<Car>() {
+
+        public int compare(Car c1, Car c2)
+        {
+
+            int car1
+                    =Integer.parseInt(c1.getYear());
+            int car2
+                    = Integer.parseInt(c2.getYear());
+            return car2-car1;
+
+        }
+
+    };
+
+    public static Comparator<Car> compareToPrice = new Comparator<Car>() {
+
+        public int compare(Car c1, Car c2)
+        {
+
+            int car1
+                =Integer.parseInt(c1.getPrice());
+            int car2
+                    = Integer.parseInt(c2.getPrice());
+            return car2-car1;
+        }
+
+    };
+
+    public static Comparator<Car> compareToBrand = new Comparator<Car>() {
+
+        public int compare(Car c1, Car c2)
+        {
+
+            String car1
+                    =c1.getBrand().toUpperCase();
+            String car2
+                    = c2.getBrand().toUpperCase();
+
+            return car1.compareTo(
+                    car2);
+
+
+        }
+
+    };
+
+
 }

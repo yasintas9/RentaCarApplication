@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,25 +32,21 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference database;
     FirebaseStorage storage;
     StorageReference storageReference;
-    static String brand,model,price,year,type,fueltype,gear,platenum,imageurl;
     private ArrayList<String> list = new ArrayList<>();
+    private Button price,year,model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent i = getIntent();
-        String platenumber = i.getStringExtra("plateNumber");
-
         recyclerView=findViewById(R.id.recyclerViewCars);
-
         database = FirebaseDatabase.getInstance().getReference();
-
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-
-
+        price=findViewById(R.id.btnPrice);
+        model=findViewById(R.id.btnBrand);
+        year=findViewById(R.id.btnYear);
 
         database.child("Cars").addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,24 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Car car1 = postSnapshot.getValue(Car.class);
                     cars.add(car1);
-
-
-
                 }
-
-
-            /*     platenum = snapshot.child("Plate Number").getValue().toString();
-                 brand = snapshot.child("Brand").getValue().toString();
-                 model =snapshot.child("Model").getValue().toString();
-                 price =snapshot.child("Price").getValue().toString();
-                 year =snapshot.child("Year").getValue().toString();
-                 type = snapshot.child("Type").getValue().toString();
-                 fueltype =snapshot.child("Fuel Type").getValue().toString();
-                 gear = snapshot.child("Gear").getValue().toString();   */
-                //imageurl = snapshot.child("Image Url").getValue().toString();
-
-                //  Car c = new Car(platenum,brand,model,price,year,type,fueltype,gear,"");
-                // cars.add(c);
                 initRecyclerView();
             }
 
@@ -83,6 +66,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(cars, Car.compareToPrice);
+                ReinitRecyclerView();
+                Toast.makeText(getApplicationContext(),"Succesfull",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        model.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(cars, Car.compareToBrand);
+                ReinitRecyclerView();
+                Toast.makeText(getApplicationContext(),"Succesfull",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(cars, Car.compareToYear);
+                ReinitRecyclerView();
+                Toast.makeText(getApplicationContext(),"Succesfull",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+    private void ReinitRecyclerView() {
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
     }
 
     private void initRecyclerView() {
@@ -90,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerItemViewAdaptor(this, cars,"18.04.2021","30.04.2021");
         recyclerView.setAdapter(adapter);
+    }
+
+    public void sort()
+    {
+
+
+
     }
 
 

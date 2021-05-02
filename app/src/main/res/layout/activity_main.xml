@@ -5,27 +5,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_gradient"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Available vehicles"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Sort by"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btnPrice"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCars"
         android:layout_width="0dp"
-        android:layout_height="690dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/btnBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_input_shape_button"
+        android:text="Brand"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnYear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnYear"
+        app:layout_constraintTop_toTopOf="@+id/btnYear"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_input_shape_button"
+        android:text="Price"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/btnYear"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/btnYear"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_input_shape_button"
+        android:text="Year"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPrice"
+        app:layout_constraintEnd_toStartOf="@+id/btnBrand"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnPrice"
+        app:layout_constraintTop_toTopOf="@+id/btnPrice" />
 </androidx.constraintlayout.widget.ConstraintLayout>
