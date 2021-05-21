@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -47,6 +48,7 @@ public class AddCarActivity extends AppCompatActivity {
     private String RadioTypeText, RadioGearText, RadioFuelTypeText;
     private Button addCarBtn;
     private DatabaseReference database;
+    private ImageButton backtoAdmin;
     FirebaseStorage storage;
     StorageReference storageReference;
 
@@ -68,11 +70,19 @@ public class AddCarActivity extends AppCompatActivity {
         radioGroupFuelType = findViewById(R.id.radioGroup5);
         addCarBtn = (Button) findViewById(R.id.btnAddCar);
         database = FirebaseDatabase.getInstance().getReference();
+        backtoAdmin = findViewById(R.id.backToAdminMenu);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-
+        backtoAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),AdminActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         carImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,28 +113,47 @@ public class AddCarActivity extends AppCompatActivity {
                 RadioFuelTypeText = RadioButtonFuelType.getText().toString();
 
                 if(checkInput()){
-                    //do the db stuffs
 
                     database.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()){
                                 if(snapshot.child("Cars").hasChild(PlateNumber)){
-                                    Toast.makeText(AddCarActivity.this,"The Car is already added",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AddCarActivity.this,"The Car is already added",Toast.LENGTH_SHORT).show();
                                 }else{
+
+                                    final ProgressDialog progressDialog = new ProgressDialog(AddCarActivity.this);
+                                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                    progressDialog.setTitle("Preparing the Product...");
+                                    progressDialog.setCancelable(false);
+                                    progressDialog.show();
 
                                     uploadImage();
 
-                                    database.child("Cars").child(PlateNumber).child("PlateNumber").setValue(PlateNumber);
-                                    database.child("Cars").child(PlateNumber).child("Brand").setValue(Brand);
-                                    database.child("Cars").child(PlateNumber).child("Model").setValue(Model);
-                                    database.child("Cars").child(PlateNumber).child("Price").setValue(Price);
-                                    database.child("Cars").child(PlateNumber).child("Year").setValue(Year);
-                                    database.child("Cars").child(PlateNumber).child("Type").setValue(RadioTypeText);
-                                    database.child("Cars").child(PlateNumber).child("Gear").setValue(RadioGearText);
-                                    database.child("Cars").child(PlateNumber).child("Fueltype").setValue(RadioFuelTypeText);
-                                    database.child("Cars").child(PlateNumber).child("Dates").setValue(dates);
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            database.child("Cars").child(PlateNumber).child("PlateNumber").setValue(PlateNumber);
+                                            database.child("Cars").child(PlateNumber).child("Brand").setValue(Brand);
+                                            database.child("Cars").child(PlateNumber).child("Model").setValue(Model);
+                                            database.child("Cars").child(PlateNumber).child("Price").setValue(Price);
+                                            database.child("Cars").child(PlateNumber).child("Year").setValue(Year);
+                                            database.child("Cars").child(PlateNumber).child("Type").setValue(RadioTypeText);
+                                            database.child("Cars").child(PlateNumber).child("Gear").setValue(RadioGearText);
+                                            database.child("Cars").child(PlateNumber).child("Fueltype").setValue(RadioFuelTypeText);
 
+                                            ArrayList<Rent> rents=new ArrayList<>();
+                                            rents.add(new Rent("","","","",""));
+
+                                            database.child("Rents").child(PlateNumber).setValue(rents);
+
+                                            progressDialog.dismiss();
+                                            Toast.makeText(AddCarActivity.this,"Car is added",Toast.LENGTH_SHORT).show();
+                                            Intent intent=new Intent(AddCarActivity.this,AdminActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }, 2000);
                                 }
                             }
                         }
@@ -177,11 +206,6 @@ public class AddCarActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-
-
-
-
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
@@ -199,47 +223,31 @@ public class AddCarActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void uploadImage() {
 
         if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Adding Database...");
-            progressDialog.show();
-
-            //  StorageReference ref = storageReference.child("CarsImage").child(PlateNumber).child("carpicture.jpg");
-            //            ref.putFile(filePath)
 
             StorageReference ref = storageReference.child(PlateNumber);
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
 
-                            //download url
                             StorageReference newReference = FirebaseStorage.getInstance().getReference(PlateNumber);
                             newReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     String downloadUrl = uri.toString();
-                                    //  System.out.println("download  uri"+downloadUrl);
-
                                     database.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if (snapshot.exists()) {
-
                                                 database.child("Cars").child(PlateNumber).child("Photo").setValue(downloadUrl);
-
-
                                             }
                                         }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
-
                                         }
                                     });
 
@@ -252,16 +260,14 @@ public class AddCarActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
+
 
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (111100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Adding to Database " + (int) progress + "%");
+
                         }
                     });
         }

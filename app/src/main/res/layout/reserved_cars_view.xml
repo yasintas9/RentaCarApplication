@@ -26,7 +26,7 @@
                 >
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/itemImage"
+                    android:id="@+id/itemImage1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -38,7 +38,7 @@
 
 
             <TextView
-                android:id="@+id/brandAndModel"
+                android:id="@+id/brandAndModel1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageCard"
@@ -51,10 +51,10 @@
 
 
             <TextView
-                android:id="@+id/year"
+                android:id="@+id/year1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/brandAndModel"
+                android:layout_below="@+id/brandAndModel1"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -70,8 +70,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_alignLeft="@+id/year"
-                android:layout_below="@+id/brandAndModel"
+                android:layout_alignLeft="@+id/year1"
+                android:layout_below="@+id/brandAndModel1"
                 android:gravity="left"
                 android:text="Year:"
                 android:textColor="@color/orange"
@@ -80,10 +80,10 @@
 
 
             <TextView
-                android:id="@+id/gear"
+                android:id="@+id/gear1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/year"
+                android:layout_below="@+id/year1"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -100,8 +100,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_alignLeft="@+id/gear"
-                android:layout_below="@+id/year"
+                android:layout_alignLeft="@+id/gear1"
+                android:layout_below="@+id/year1"
                 android:gravity="left"
                 android:text="Gear:"
                 android:textColor="@color/orange"
@@ -111,10 +111,10 @@
 
 
             <TextView
-                android:id="@+id/type"
+                android:id="@+id/type1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/gear"
+                android:layout_below="@+id/gear1"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -131,8 +131,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_alignLeft="@+id/year"
-                android:layout_below="@+id/gear"
+                android:layout_alignLeft="@+id/year1"
+                android:layout_below="@+id/gear1"
                 android:gravity="left"
                 android:text="Type:"
                 android:textColor="@color/orange"
@@ -140,10 +140,10 @@
                 android:textStyle="italic"></TextView>
 
             <TextView
-                android:id="@+id/fuelType"
+                android:id="@+id/fuelType1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/type"
+                android:layout_below="@+id/type1"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -159,8 +159,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_alignLeft="@+id/year"
-                android:layout_below="@+id/type"
+                android:layout_alignLeft="@+id/year1"
+                android:layout_below="@+id/type1"
                 android:gravity="left"
                 android:text="Fuel Type:"
                 android:textColor="@color/orange"
@@ -169,10 +169,10 @@
 
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/price1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/fuelType"
+                android:layout_below="@+id/fuelType1"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -188,20 +188,20 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_alignLeft="@+id/year"
-                android:layout_below="@+id/fuelType"
+                android:layout_alignLeft="@+id/year1"
+                android:layout_below="@+id/fuelType1"
                 android:gravity="left"
-                android:text="One Day Price:"
+                android:text="Total Price:"
                 android:textColor="@color/orange"
                 android:textSize="20sp"
                 android:textStyle="italic"></TextView>
 
 
             <TextView
-                android:id="@+id/pickupDate"
+                android:id="@+id/pickupDate1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/price"
+                android:layout_below="@+id/price1"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -217,8 +217,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_alignLeft="@+id/year"
-                android:layout_below="@+id/price"
+                android:layout_alignLeft="@+id/year1"
+                android:layout_below="@+id/price1"
                 android:gravity="left"
                 android:text="Pick up Date:"
                 android:textColor="@color/orange"
@@ -227,10 +227,10 @@
 
 
             <TextView
-                android:id="@+id/dropoffDate"
+                android:id="@+id/dropoffDate1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pickupDate"
+                android:layout_below="@+id/pickupDate1"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="right"
@@ -246,7 +246,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="-65dp"
                 android:layout_marginStart="15dp"
-                android:layout_below="@+id/pickupDate"
+                android:layout_below="@+id/pickupDate1"
                 android:gravity="left"
                 android:text="Drop off Date:"
                 android:textColor="@color/orange"
@@ -254,15 +254,15 @@
                 android:textStyle="italic"></TextView>
 
             <TextView
-                android:id="@+id/selectCar"
+                android:id="@+id/paymentforCar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/dropoffDate"
+                android:layout_below="@+id/dropoffDate1"
                 android:layout_marginTop="27dp"
                 android:background="@drawable/ic_input_shape"
                 android:backgroundTint="@color/orange"
                 android:gravity="center"
-                android:text="Reserve"
+                android:text="Payment"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"></TextView>

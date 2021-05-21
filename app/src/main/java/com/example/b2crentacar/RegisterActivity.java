@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,8 +27,9 @@ public class RegisterActivity extends AppCompatActivity {
     private Button signup;
     private EditText id,name,surname,phone,birthDate,mail,password,confirmPassword;
     private String Id,Name,Surname,Phone,BirtDate,Mail,Password,ConfirmPassword;
-    private  FirebaseAuth fAuth;
-    private  DatabaseReference db;
+    private FirebaseAuth fAuth;
+    private DatabaseReference db;
+    private ImageButton back;
 
 
 
@@ -48,6 +50,15 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPassword=findViewById(R.id.txtPasswordConfirm);
         fAuth= FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance().getReference();
+        back=findViewById(R.id.backbutton);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

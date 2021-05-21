@@ -110,11 +110,13 @@ public class Car {
         public int compare(Car c1, Car c2)
         {
 
-            int car1
-                    =Integer.parseInt(c1.getYear());
-            int car2
-                    = Integer.parseInt(c2.getYear());
-            return car2-car1;
+            String car1
+                    =c1.getYear();
+            String car2
+                    = c2.getYear();
+
+            return car2.compareTo(
+                    car1);
 
         }
 
@@ -152,5 +154,19 @@ public class Car {
 
     };
 
-
+    @Override
+    public String toString() {
+        return "Car{" +
+                "PlateNumber='" + PlateNumber + '\'' +
+                ", Brand='" + Brand + '\'' +
+                ", Model='" + Model + '\'' +
+                ", Price='" + Price + '\'' +
+                ", Year='" + Year + '\'' +
+                ", Type='" + Type + '\'' +
+                ", Fueltype='" + Fueltype + '\'' +
+                ", Gear='" + Gear + '\'' +
+                ", Photo='" + Photo + '\'' +
+                ", dates=" + dates +
+                '}';
+    }
 }

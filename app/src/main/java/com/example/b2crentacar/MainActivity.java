@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.common.reflect.TypeToken;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,8 +20,10 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference database;
     FirebaseStorage storage;
     StorageReference storageReference;
-    private ArrayList<String> list = new ArrayList<>();
     private Button price,year,model;
+    String startDate,endDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +52,17 @@ public class MainActivity extends AppCompatActivity {
         model=findViewById(R.id.btnBrand);
         year=findViewById(R.id.btnYear);
 
-        database.child("Cars").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        cars.clear();
 
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Car car1 = postSnapshot.getValue(Car.class);
-                    cars.add(car1);
-                }
-                initRecyclerView();
-            }
+        Type type = new TypeToken<ArrayList<Car>>() {
+        }.getType();
+        cars = new Gson().fromJson(getIntent().getStringExtra("car_list"), type);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        startDate =getIntent().getStringExtra("startDate");
 
-            }
-        });
+        endDate =getIntent().getStringExtra("endDate");
+
+       initRecyclerView();
 
 
         price.setOnClickListener(new View.OnClickListener() {
@@ -104,18 +103,8 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerItemViewAdaptor(this, cars,"18.04.2021","30.04.2021");
+        adapter = new RecyclerItemViewAdaptor(this, cars,startDate,endDate);
         recyclerView.setAdapter(adapter);
     }
-
-    public void sort()
-    {
-
-
-
-    }
-
-
-
 
 }

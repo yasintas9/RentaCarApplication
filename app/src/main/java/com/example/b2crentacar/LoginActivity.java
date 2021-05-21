@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private String Mail,Password;
     private FirebaseAuth fAuth;
     private TextView goSignUp;
+    private ImageButton goSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,16 @@ public class LoginActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         goSignUp=findViewById(R.id.textViewtoSignUp);
 
+        goSearch=findViewById(R.id.goSearchPage);
+
+        goSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,SearchAndFilterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         goSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +79,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, SearchAndFilterActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
-
-
-
                             else {
-                                Toast.makeText(LoginActivity.this, "Kullanıcı sistemde kayıtlı değil.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Check Username or password", Toast.LENGTH_LONG).show();
                             }
                         }
                     });

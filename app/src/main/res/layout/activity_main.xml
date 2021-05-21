@@ -46,7 +46,7 @@
     <Button
         android:id="@+id/btnBrand"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="25dp"
         android:background="@drawable/ic_input_shape_button"
         android:text="Brand"
         android:textAllCaps="false"
@@ -60,7 +60,7 @@
     <Button
         android:id="@+id/btnPrice"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="25dp"
         android:background="@drawable/ic_input_shape_button"
         android:text="Price"
         android:textAllCaps="false"
@@ -73,7 +73,7 @@
     <Button
         android:id="@+id/btnYear"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="25dp"
         android:background="@drawable/ic_input_shape_button"
         android:text="Year"
         android:textAllCaps="false"
